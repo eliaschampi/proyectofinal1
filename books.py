@@ -25,7 +25,7 @@ def callAction(option, bookinstance: Book):
         path = input(f"Ruta del base de datos: Por defecto ({constants.BOOK_DB}) =>")
         bookinstance.loadBooks(path or constants.BOOK_DB)
         print(colored("Correctamente cargado", "green"))
-    else if option == "2"
+    elif option == "2":
         books = bookinstance.getAll()
         print(books)
 
