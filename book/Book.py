@@ -17,8 +17,8 @@ class Book:
 
             title = self.strToList(next(lines))
 
-            for row in lines:
-                books.append(listToDict(title, self.strToList(row)))
+            books = [listToDict(title, self.strToList(row)) for row in lines]
+
         self.books = books
 
     def test(self, ping):
