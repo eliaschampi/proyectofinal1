@@ -1,8 +1,10 @@
 from utils.decorators import listToDict
+from utils.constants import DB_SEPARATOR
+
 
 class Book:
 
-    __SEP = "|"
+    __SEP = DB_SEPARATOR
 
     def __init__(self) -> None:
         self.books = []
@@ -10,18 +12,24 @@ class Book:
     def __strToList(self, row: str) -> list:
         return row.split(self.__SEP)
 
-    def loadBooks(self, db) -> None:
+    def loadBooks(self, db: str) -> None:
 
         books = []
-        with open(db, "r") as lines:
+        try:
 
-            title = self.__strToList(next(lines))
+            with open(db, "r") as lines:
 
-            books = [listToDict(title, self.__strToList(row)) for row in lines]
+                title = self.__strToList(next(lines))
 
-        self.books = books
+                books = [listToDict(title, self.__strToList(row))
+                         for row in lines]
+        except:
+            print("Ocurrión un error al cargar la base de datos local")
+            exit()
+        finally:
+            self.books = books
 
-    def test(self, ping):
+    def test(self, ping: str):
         print("pong")
 
     def getAll(self) -> list:
