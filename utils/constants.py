@@ -10,6 +10,11 @@ default local book db
 BOOK_DB = "./book/db.txt"
 
 """
+separator for each columns on rows db local
+"""
+DB_SEPARATOR = "|"
+
+"""
 book options
 """
 BOOK_OPTIONS = {
