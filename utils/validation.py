@@ -1,5 +1,6 @@
 from utils import constants
 
+
 def validateMenuOptions(options: list, userinput):
 
     counter = 0
@@ -7,7 +8,7 @@ def validateMenuOptions(options: list, userinput):
     while userinput not in options and counter < limit:
         userinput = input("Ingresa una opción: => ")
         counter += 1
-    else: 
+    else:
         if userinput in options:
             return userinput
         else:
