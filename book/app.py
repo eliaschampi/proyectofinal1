@@ -29,4 +29,8 @@ def callAction(option: str, bookinstance) -> bool:
         decorators.printAsTableForm(books)
         return True
 
+    elif option == "3":
+        #addbook
+        return True
+
     return False

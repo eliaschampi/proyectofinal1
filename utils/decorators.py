@@ -21,3 +21,4 @@ def printAsTableForm(books: list):
     for book in books:
         row = iter(book.values())
         print(cols.format(*row))
+
