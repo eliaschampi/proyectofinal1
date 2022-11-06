@@ -1,41 +1,41 @@
 from book.Book import Book
 from termcolor import colored
-from utils import constants, validation
+from book.app import showMenu, callAction
 
-def showWelcome():
-    print("Bienvenido a tus [name]")
+
+def showWelcome() -> None:
+    print(colored("Bienvenido a tu programa", "blue"))
     print("****" * 5)
 
 
-def showMenu():
-
-    print(colored("MENU DEL PROGRAMA", "green"))
-
-    options = constants.BOOK_OPTIONS
-
-    for key, value in options.items():
-        print(key, " => ", value)
-
-    return validation.validateMenuOptions(options.keys(), "")
+def showGoodBye() -> None:
+    print(colored("Hasta pronto!", "blue"))
+    exit()
 
 
-def callAction(option, bookinstance: Book):
-    
-    if option == "1":
-        path = input(f"Ruta del base de datos: Por defecto ({constants.BOOK_DB}) =>")
-        bookinstance.loadBooks(path or constants.BOOK_DB)
-        print(colored("Correctamente cargado", "green"))
-    elif option == "2":
-        books = bookinstance.getAll()
-        print(books)
+def main(bookinstance: Book) -> bool:
+
+    if callAction(showMenu(), bookinstance):
+        msg = colored("Volver al menu (si/no) por omision (si) => ", "yellow")
+        return (input(msg) or "si") == "si"
+
+    return False
 
 
 if __name__ == "__main__":
-    book = Book()
- 
-    showWelcome()
-    option = showMenu()
-    callAction(option, book)
 
-    #books = book.getAll()
-    #print(books)
+    # show welcome message
+    showWelcome()
+
+    # start book instance
+    bookinstance: Book = Book()
+
+    willBeContinue = True
+
+    while willBeContinue:
+
+        willBeContinue = main(bookinstance)
+
+    else:
+
+        showGoodBye()

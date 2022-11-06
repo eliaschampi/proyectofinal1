@@ -1,5 +1,6 @@
 from utils.decorators import listToDict
 
+
 class Book:
 
     __SEP = "|"
