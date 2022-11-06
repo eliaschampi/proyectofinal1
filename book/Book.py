@@ -1,6 +1,5 @@
 from utils.decorators import listToDict
 
-
 class Book:
 
     __SEP = "|"
@@ -8,7 +7,7 @@ class Book:
     def __init__(self) -> None:
         self.books = []
 
-    def strToList(self, row: str) -> list:
+    def __strToList(self, row: str) -> list:
         return row.split(self.__SEP)
 
     def loadBooks(self, db) -> None:
@@ -16,9 +15,9 @@ class Book:
         books = []
         with open(db, "r") as lines:
 
-            title = self.strToList(next(lines))
+            title = self.__strToList(next(lines))
 
-            books = [listToDict(title, self.strToList(row)) for row in lines]
+            books = [listToDict(title, self.__strToList(row)) for row in lines]
 
         self.books = books
 

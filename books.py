@@ -1,16 +1,6 @@
 from book.Book import Book
-from termcolor import colored
 from book.app import showMenu, callAction
-
-
-def showWelcome() -> None:
-    print(colored("Bienvenido a tu programa", "blue"))
-    print("****" * 5)
-
-
-def showGoodBye() -> None:
-    print(colored("Hasta pronto!", "blue"))
-    exit()
+from utils.common import showWelcome, showGoodBye
 
 
 def main(bookinstance: Book) -> bool:
