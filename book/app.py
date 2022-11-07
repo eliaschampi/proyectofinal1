@@ -30,7 +30,28 @@ def callAction(option: str, bookinstance) -> bool:
         return True
 
     elif option == "3":
-        #addbook
+        
+        bookItem: dict = {}
+
+        bookItem["id"] = input(colored("Ingresa el id del libro => ", "blue"))
+        bookItem["Titulo"] = input(colored("Ingresa el título => ", "blue"))
+        bookItem["Genero"] = input(colored("Ingresa el genero => ", "blue"))
+        bookItem["Editorial"] = input(colored("Ingresa el editorial => ", "blue"))
+        bookItem["Autor"] = input(colored("Ingresa el autor => ", "blue"))
+
+        message, success = bookinstance.addBook(bookItem)
+
+        colormsg = "green" if success else "red"
+
+        print(colored(message, colormsg))
+
+        return success
+    
+    elif option == "6":
+        omision = colored(f"Por omisión ({constants.BOOK_DB})", "blue")
+        path = input(f"Ruta del base de datos: {omision} => ")
+        message = bookinstance.saveBook(path or constants.BOOK_DB)
+        print(colored(message, "green"))
         return True
 
     return False

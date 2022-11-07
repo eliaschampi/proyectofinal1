@@ -1,6 +1,6 @@
-from utils.decorators import listToDict
+from utils.decorators import listToDict, dictToStrLine
 from utils.constants import DB_SEPARATOR
-
+from utils.validation import validateBookItem
 
 class Book:
 
@@ -29,8 +29,34 @@ class Book:
         finally:
             self.books = books
 
-    def test(self, ping: str):
-        print("pong")
-
     def getAll(self) -> list:
         return self.books
+
+    def addBook(self, bookItem: dict):
+
+        message, validated = validateBookItem(bookItem)
+
+        if not validated:
+            return message, False
+        print(message)
+        self.books.append(bookItem)
+        return "Correctamente agregado", True
+
+    def saveBook(self, db: str) -> str:
+
+        try:
+
+            with open(db, "w") as file:
+
+                titleItem = self.books[0]
+                
+                file.write(dictToStrLine(titleItem, True, self.__SEP))
+
+                for book in self.books:
+
+                    file.write(dictToStrLine(book, False, self.__SEP))
+        except Exception as error:
+            print(error)
+            exit()
+        else:
+            return "Correctamente guardado"
