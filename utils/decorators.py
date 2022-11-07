@@ -7,6 +7,24 @@ def listToDict(title: list, row: list) -> dict:
         book[f"{value.strip()}"] = f"{row[count].strip()}"
     return book
 
+def dictToStrLine(dictItem: dict, istitle: bool, seperator: str) -> str:
+
+    
+    linelist = dictItem.keys() if istitle else dictItem.values()
+
+    linestr = ""
+
+    lastitem = list(linelist)[-1]
+
+    for column in linelist:
+
+        if lastitem != column:
+            linestr += f" {column} {seperator}"
+        else:
+            linestr += f" {column}"
+
+    return f"{linestr} \n"
+
 
 def printAsTableForm(books: list):
 
@@ -21,3 +39,4 @@ def printAsTableForm(books: list):
     for book in books:
         row = iter(book.values())
         print(cols.format(*row))
+
